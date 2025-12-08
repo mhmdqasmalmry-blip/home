@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>جنين — للإعلانات الذكية</title>
+  <title>جنين — مولّد صفحة هبوط وإعلانات ذكية</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
@@ -24,7 +24,7 @@
       --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
       --radius: 12px;
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition: all 0.3s ease;
     }
     
     * {
@@ -49,40 +49,133 @@
       padding: 0 24px;
     }
     
-    /* Hero Header - مع كل الأنيميشنات */
+    /* Hero Header */
     .hero-header {
       background: linear-gradient(135deg, rgba(124, 58, 237, 0.95), rgba(91, 33, 182, 0.95)),
                   url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
       background-size: cover;
       background-position: center;
-      background-attachment: fixed;
       color: white;
-      padding: 100px 0;
+      padding: 80px 0;
       position: relative;
       overflow: hidden;
-      animation: gradientShift 15s ease infinite alternate;
     }
     
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
     }
     
-    .hero-header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background: linear-gradient(135deg, rgba(124, 58, 237, 0.9), rgba(91, 33, 182, 0.9));
-      animation: pulseGlow 8s ease-in-out infinite alternate;
+    .hero-logo {
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 30px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+      animation: float 6s ease-in-out infinite;
     }
     
-    @keyframes pulseGlow {
-      0% { opacity: 0.8; filter: brightness(0.9); }
-      100% { opacity: 1; filter: brightness(1.1); }
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+    
+    .hero-logo:hover {
+      transform: rotate(15deg) scale(1.1);
+      background: rgba(255, 255, 255, 0.3);
+      animation: none;
+    }
+    
+    .hero-logo i {
+      font-size: 48px;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    .hero-title {
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(to right, #ffffff, #ede9fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: slideInDown 1s ease-out;
+    }
+    
+    @keyframes slideInDown {
+      from { 
+        opacity: 0; 
+        transform: translateY(-50px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+    
+    .hero-subtitle {
+      font-size: 22px;
+      margin-bottom: 30px;
+      opacity: 0.95;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+    
+    @keyframes fadeInUp {
+      from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+    
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 50px;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+    
+    .stat-item {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stat-value {
+      font-size: 36px;
+      font-weight: 800;
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      font-size: 16px;
+      opacity: 0.9;
     }
     
     /* Floating Particles */
@@ -98,9 +191,9 @@
     
     .particle {
       position: absolute;
-      background: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.3);
       border-radius: 50%;
-      animation: floatParticle 20s infinite linear;
+      animation: floatParticle 15s infinite linear;
     }
     
     @keyframes floatParticle {
@@ -120,245 +213,80 @@
       }
     }
     
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    
-    .hero-logo {
-      width: 120px;
-      height: 120px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 40px;
-      border: 4px solid rgba(255, 255, 255, 0.3);
-      transition: var(--transition);
-      backdrop-filter: blur(10px);
-      animation: floatLogo 8s ease-in-out infinite, glowLogo 4s ease-in-out infinite alternate;
-    }
-    
-    @keyframes floatLogo {
-      0%, 100% { 
-        transform: translateY(0px) rotate(0deg) scale(1); 
-      }
-      33% { 
-        transform: translateY(-25px) rotate(5deg) scale(1.05); 
-      }
-      66% { 
-        transform: translateY(10px) rotate(-3deg) scale(1.02); 
-      }
-    }
-    
-    @keyframes glowLogo {
-      0% { 
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2), 
-                    inset 0 0 20px rgba(255, 255, 255, 0.1); 
-      }
-      100% { 
-        box-shadow: 0 0 40px rgba(255, 255, 255, 0.4), 
-                    inset 0 0 30px rgba(255, 255, 255, 0.2); 
-      }
-    }
-    
-    .hero-logo:hover {
-      animation-play-state: paused;
-      transform: scale(1.1) rotate(15deg);
-      background: rgba(255, 255, 255, 0.3);
-    }
-    
-    .hero-logo i {
-      font-size: 56px;
-      animation: pulseIcon 3s ease-in-out infinite, rotateIcon 20s linear infinite;
-    }
-    
-    @keyframes pulseIcon {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.2); opacity: 0.8; }
-    }
-    
-    @keyframes rotateIcon {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    
-    .hero-title {
-      font-size: 52px;
-      font-weight: 800;
-      margin-bottom: 25px;
-      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
-      background: linear-gradient(45deg, #ffffff, #ede9fe, #ffffff);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: textShine 6s linear infinite, titleFloat 4s ease-in-out infinite alternate;
-    }
-    
-    @keyframes textShine {
-      0% { background-position: 0% center; }
-      100% { background-position: 200% center; }
-    }
-    
-    @keyframes titleFloat {
-      0% { transform: translateY(0px); }
-      100% { transform: translateY(-10px); }
-    }
-    
-    .hero-subtitle {
-      font-size: 24px;
-      margin-bottom: 40px;
-      opacity: 0.95;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.8;
-      animation: fadeInUp 1.5s ease-out 0.5s both, subtitleGlow 3s ease-in-out infinite alternate;
-    }
-    
-    @keyframes subtitleGlow {
-      0% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
-      100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
-    }
-    
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 50px;
-      margin-top: 60px;
-      flex-wrap: wrap;
-      animation: fadeInUp 1.5s ease-out 1s both;
-    }
-    
-    .stat-item {
-      text-align: center;
-      position: relative;
-      padding: 20px;
-      animation: statPulse 4s ease-in-out infinite;
-    }
-    
-    @keyframes statPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    
-    .stat-value {
-      font-size: 42px;
-      font-weight: 800;
-      display: block;
-      margin-bottom: 10px;
-      animation: countUp 3s ease-out;
-    }
-    
-    @keyframes countUp {
-      from { 
-        opacity: 0; 
-        transform: translateY(30px) scale(0.8); 
-      }
-      to { 
-        opacity: 1; 
-        transform: translateY(0) scale(1); 
-      }
-    }
-    
-    .stat-label {
-      font-size: 18px;
-      opacity: 0.9;
-      animation: fadeIn 2s ease-out 1.5s both;
-    }
-    
     /* Features Section */
     .features-section {
       background: white;
-      padding: 100px 0;
-      margin-top: -50px;
-      border-radius: 60px 60px 0 0;
+      padding: 80px 0;
+      margin-top: -40px;
+      border-radius: 40px 40px 0 0;
       position: relative;
       z-index: 10;
-      box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.1);
-      animation: slideInUp 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
+      animation: slideInUp 1s ease-out;
     }
     
     @keyframes slideInUp {
       from { 
         opacity: 0; 
-        transform: translateY(100px) rotateX(-10deg); 
+        transform: translateY(50px); 
       }
       to { 
         opacity: 1; 
-        transform: translateY(0) rotateX(0); 
+        transform: translateY(0); 
       }
     }
     
     .section-title {
       text-align: center;
-      font-size: 42px;
+      font-size: 36px;
       color: var(--primary);
-      margin-bottom: 60px;
-      font-weight: 800;
+      margin-bottom: 50px;
+      font-weight: 700;
       position: relative;
       display: inline-block;
       left: 50%;
       transform: translateX(-50%);
-      animation: titleWave 4s ease-in-out infinite;
-    }
-    
-    @keyframes titleWave {
-      0%, 100% { transform: translateX(-50%) scale(1); }
-      50% { transform: translateX(-50%) scale(1.05); }
     }
     
     .section-title::after {
       content: '';
       position: absolute;
-      bottom: -15px;
+      bottom: -10px;
       right: 0;
-      width: 80px;
-      height: 5px;
+      width: 60px;
+      height: 4px;
       background: linear-gradient(90deg, var(--primary), var(--primary-light));
-      border-radius: 3px;
-      animation: widthGrow 2s ease-out, linePulse 3s ease-in-out infinite;
+      border-radius: 2px;
+      animation: widthGrow 1.5s ease-out;
     }
     
     @keyframes widthGrow {
-      from { width: 0; opacity: 0; }
-      to { width: 80px; opacity: 1; }
-    }
-    
-    @keyframes linePulse {
-      0%, 100% { transform: scaleX(1); }
-      50% { transform: scaleX(1.2); }
+      from { width: 0; }
+      to { width: 60px; }
     }
     
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 40px;
-      margin-bottom: 80px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
     }
     
     .feature-card {
-      background: linear-gradient(145deg, #ffffff, #f8fafc);
+      background: var(--bg);
       border-radius: var(--radius);
-      padding: 40px 30px;
+      padding: 30px;
       text-align: center;
       transition: var(--transition);
-      border: 3px solid transparent;
+      border: 2px solid transparent;
       position: relative;
       overflow: hidden;
-      animation: cardFloat 6s ease-in-out infinite;
-      animation-delay: calc(var(--delay) * 0.2s);
     }
     
-    @keyframes cardFloat {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      33% { transform: translateY(-15px) rotate(1deg); }
-      66% { transform: translateY(5px) rotate(-1deg); }
+    .feature-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-lg);
     }
     
     .feature-card::before {
@@ -368,56 +296,40 @@
       right: 0;
       width: 100%;
       height: 5px;
-      background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--primary));
-      background-size: 200% auto;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
       transform: translateX(-100%);
-      transition: transform 0.8s ease;
-      animation: shimmer 3s infinite linear;
-    }
-    
-    @keyframes shimmer {
-      0% { background-position: 0% center; }
-      100% { background-position: 200% center; }
+      transition: transform 0.5s ease;
     }
     
     .feature-card:hover::before {
       transform: translateX(0);
-      animation: none;
-    }
-    
-    .feature-card:hover {
-      transform: translateY(-20px) scale(1.05) rotateY(10deg);
-      border-color: var(--primary);
-      box-shadow: var(--shadow-lg), 0 20px 40px rgba(124, 58, 237, 0.2);
-      animation-play-state: paused;
     }
     
     .feature-icon {
-      width: 90px;
-      height: 90px;
-      background: linear-gradient(135deg, var(--primary-light), #ffffff);
+      width: 70px;
+      height: 70px;
+      background: var(--primary-light);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 25px;
+      margin: 0 auto 20px;
       color: var(--primary);
-      font-size: 36px;
+      font-size: 28px;
       transition: var(--transition);
-      animation: iconBounce 1.5s ease-out, iconRotate 10s linear infinite;
-      box-shadow: 0 10px 20px rgba(124, 58, 237, 0.1);
+      animation: bounceIn 1s ease-out;
     }
     
-    @keyframes iconBounce {
+    @keyframes bounceIn {
       0% {
         opacity: 0;
-        transform: scale(0.5) rotate(-180deg);
+        transform: scale(0.3) rotate(-180deg);
       }
-      60% {
-        transform: scale(1.2) rotate(20deg);
+      50% {
+        transform: scale(1.1) rotate(10deg);
       }
-      80% {
-        transform: scale(0.9) rotate(-10deg);
+      70% {
+        transform: scale(0.9) rotate(-5deg);
       }
       100% {
         opacity: 1;
@@ -425,41 +337,29 @@
       }
     }
     
-    @keyframes iconRotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    
     .feature-card:hover .feature-icon {
-      animation: iconHover 0.6s ease-out;
-      transform: rotateY(360deg) scale(1.2);
+      transform: rotateY(180deg) scale(1.1);
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: white;
     }
     
-    @keyframes iconHover {
-      0% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.3) rotate(180deg); }
-      100% { transform: scale(1.2) rotate(360deg); }
+    .feature-title {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: var(--primary);
     }
     
     /* Main Content */
     .main-content {
-      padding: 80px 0;
+      padding: 60px 0;
       background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-      animation: contentFadeIn 1.5s ease-out;
-    }
-    
-    @keyframes contentFadeIn {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
     }
     
     .main-grid {
       display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 40px;
-      margin: 40px 0;
+      grid-template-columns: 1fr 400px;
+      gap: 30px;
+      margin: 30px 0;
     }
     
     /* Cards */
@@ -468,94 +368,69 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow: hidden;
-      margin-bottom: 30px;
+      margin-bottom: 24px;
       transition: var(--transition);
-      border: 2px solid transparent;
-      animation: cardAppear 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
-      animation-delay: calc(var(--card-index) * 0.1s);
+      border: 1px solid var(--border);
+      animation: cardAppear 0.8s ease-out;
     }
     
     @keyframes cardAppear {
       0% {
         opacity: 0;
-        transform: translateY(50px) scale(0.9) rotateX(-20deg);
+        transform: translateY(20px) scale(0.95);
       }
       100% {
         opacity: 1;
-        transform: translateY(0) scale(1) rotateX(0);
+        transform: translateY(0) scale(1);
       }
     }
     
     .card:hover {
-      box-shadow: var(--shadow-lg), 0 15px 30px rgba(124, 58, 237, 0.15);
-      transform: translateY(-10px) rotateY(5deg);
-      border-color: var(--primary);
-      animation: cardHover 0.6s ease-out;
-    }
-    
-    @keyframes cardHover {
-      0% { transform: translateY(0) rotateY(0); }
-      50% { transform: translateY(-15px) rotateY(10deg); }
-      100% { transform: translateY(-10px) rotateY(5deg); }
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-5px);
     }
     
     .card-header {
-      padding: 25px 30px;
-      border-bottom: 2px solid var(--border);
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: linear-gradient(135deg, #f8fafc, #ffffff);
-      animation: headerSlide 0.8s ease-out;
-    }
-    
-    @keyframes headerSlide {
-      from { transform: translateX(50px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+      background: linear-gradient(to left, #f8fafc, #ffffff);
     }
     
     .card-header h2, .card-header h3 {
       margin: 0;
-      font-size: 22px;
-      font-weight: 800;
+      font-size: 20px;
+      font-weight: 700;
       color: var(--primary);
-      animation: textGlow 3s ease-in-out infinite alternate;
-    }
-    
-    @keyframes textGlow {
-      0% { text-shadow: 0 0 5px rgba(124, 58, 237, 0.2); }
-      100% { text-shadow: 0 0 15px rgba(124, 58, 237, 0.4); }
     }
     
     .card-body {
-      padding: 30px;
+      padding: 24px;
     }
     
     /* Forms */
     .form-group {
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       position: relative;
-      animation: formSlideIn 0.8s ease-out both;
-      animation-delay: calc(var(--form-index) * 0.1s);
-    }
-    
-    @keyframes formSlideIn {
-      from { opacity: 0; transform: translateX(30px); }
-      to { opacity: 1; transform: translateX(0); }
     }
     
     label {
       display: block;
-      margin-bottom: 10px;
-      font-weight: 700;
+      margin-bottom: 8px;
+      font-weight: 600;
       color: var(--text);
-      font-size: 16px;
-      animation: labelPop 0.6s ease-out 0.3s both;
+      font-size: 15px;
     }
     
-    @keyframes labelPop {
-      0% { opacity: 0; transform: translateY(-20px) scale(0.8); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
+    .form-hint {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
     
     .input-with-icon {
@@ -564,47 +439,28 @@
     
     .input-icon {
       position: absolute;
-      left: 15px;
+      left: 12px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--text-muted);
       transition: var(--transition);
-      animation: iconFloat 4s ease-in-out infinite;
-    }
-    
-    @keyframes iconFloat {
-      0%, 100% { transform: translateY(-50%) scale(1); }
-      50% { transform: translateY(-50%) scale(1.1); }
     }
     
     input[type="text"], input[type="url"], textarea, select {
       width: 100%;
-      padding: 16px 20px;
+      padding: 14px 16px;
       border: 2px solid var(--border);
-      border-radius: 10px;
-      font-size: 16px;
+      border-radius: 8px;
+      font-size: 15px;
       transition: var(--transition);
       font-family: inherit;
       background: white;
-      animation: inputAppear 0.6s ease-out;
-    }
-    
-    @keyframes inputAppear {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
     }
     
     input[type="text"]:focus, input[type="url"]:focus, textarea:focus, select:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2), 0 0 20px rgba(124, 58, 237, 0.1);
-      animation: inputFocus 0.4s ease-out;
-    }
-    
-    @keyframes inputFocus {
-      0% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
-      70% { box-shadow: 0 0 0 10px rgba(124, 58, 237, 0); }
-      100% { box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2); }
+      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15);
     }
     
     input[type="text"]:focus + .input-icon,
@@ -612,20 +468,13 @@
     textarea:focus + .input-icon,
     select:focus + .input-icon {
       color: var(--primary);
-      transform: translateY(-50%) scale(1.3);
-      animation: iconFocus 0.6s ease-out;
-    }
-    
-    @keyframes iconFocus {
-      0% { transform: translateY(-50%) scale(1); }
-      50% { transform: translateY(-50%) scale(1.5); }
-      100% { transform: translateY(-50%) scale(1.3); }
+      transform: translateY(-50%) scale(1.2);
     }
     
     textarea {
-      min-height: 140px;
+      min-height: 120px;
       resize: vertical;
-      line-height: 1.7;
+      line-height: 1.6;
     }
     
     /* Buttons */
@@ -633,312 +482,1194 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      padding: 16px 28px;
+      gap: 10px;
+      padding: 14px 24px;
       border: none;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 17px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
       cursor: pointer;
       transition: var(--transition);
       font-family: inherit;
       position: relative;
       overflow: hidden;
-      animation: buttonPop 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
-      animation-delay: calc(var(--btn-index) * 0.1s);
-    }
-    
-    @keyframes buttonPop {
-      0% { opacity: 0; transform: scale(0.8) rotate(-10deg); }
-      100% { opacity: 1; transform: scale(1) rotate(0); }
-    }
-    
-    .btn::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      right: 50%;
-      width: 5px;
-      height: 5px;
-      background: rgba(255, 255, 255, 0.6);
-      opacity: 0;
-      border-radius: 100%;
-      transform: scale(1, 1) translate(-50%);
-      transform-origin: 50% 50%;
-    }
-    
-    .btn:focus:not(:active)::after {
-      animation: ripple 1s ease-out;
-    }
-    
-    @keyframes ripple {
-      0% {
-        transform: scale(0, 0);
-        opacity: 0.5;
-      }
-      100% {
-        transform: scale(40, 40);
-        opacity: 0;
-      }
     }
     
     .btn-primary {
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: white;
-      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
-      animation: buttonPulse 3s ease-in-out infinite;
-    }
-    
-    @keyframes buttonPulse {
-      0%, 100% { 
-        transform: scale(1); 
-        box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4); 
-      }
-      50% { 
-        transform: scale(1.05); 
-        box-shadow: 0 10px 30px rgba(124, 58, 237, 0.6); 
-      }
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
     }
     
     .btn-primary:hover {
       background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-      transform: translateY(-5px) scale(1.1);
-      box-shadow: 0 12px 40px rgba(124, 58, 237, 0.7);
-      animation: buttonShake 0.6s ease;
-    }
-    
-    @keyframes buttonShake {
-      0%, 100% { transform: translateX(0) translateY(-5px) scale(1.1); }
-      25% { transform: translateX(-5px) translateY(-5px) scale(1.1); }
-      75% { transform: translateX(5px) translateY(-5px) scale(1.1); }
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
     }
     
     .btn-secondary {
       background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
       color: white;
-      box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+      box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
     }
     
     .btn-success {
       background: linear-gradient(135deg, var(--success), #059669);
       color: white;
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
     }
     
     .btn-group {
       display: flex;
-      gap: 20px;
-      margin-top: 35px;
+      gap: 15px;
+      margin-top: 30px;
       flex-wrap: wrap;
     }
     
     /* Results */
     .result-box {
-      background: linear-gradient(135deg, #f8fafc, #ffffff);
-      border: 3px dashed #cbd5e0;
-      border-radius: 12px;
-      padding: 25px;
-      margin-top: 20px;
-      font-size: 16px;
-      line-height: 1.7;
+      background: #f8fafc;
+      border: 2px dashed #cbd5e0;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 16px;
+      white-space: pre-wrap;
+      font-size: 15px;
+      line-height: 1.6;
       transition: var(--transition);
-      animation: resultSlideIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      overflow-wrap: break-word;
-    }
-    
-    @keyframes resultSlideIn {
-      0% { opacity: 0; transform: translateX(-50px) rotateY(90deg); }
-      100% { opacity: 1; transform: translateX(0) rotateY(0); }
     }
     
     .result-box:hover {
       border-color: var(--primary);
       background: white;
-      transform: translateY(-5px);
-      animation: borderGlow 2s infinite, resultHover 0.6s ease-out;
-    }
-    
-    @keyframes borderGlow {
-      0%, 100% { border-color: var(--primary); }
-      50% { border-color: var(--primary-light); }
-    }
-    
-    @keyframes resultHover {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-5px); }
     }
     
     .result-title {
       font-weight: 800;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       color: var(--primary);
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 20px;
-      animation: titleSlide 0.8s ease-out 0.3s both;
-    }
-    
-    @keyframes titleSlide {
-      from { opacity: 0; transform: translateX(-30px); }
-      to { opacity: 1; transform: translateX(0); }
+      gap: 10px;
+      font-size: 18px;
     }
     
     /* Preview */
     .preview-container {
-      border: 3px solid var(--border);
-      border-radius: 15px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
       overflow: hidden;
       transition: var(--transition);
-      animation: previewFloat 8s ease-in-out infinite alternate, previewGlow 4s ease-in-out infinite alternate;
-    }
-    
-    @keyframes previewFloat {
-      0% { transform: translateY(0) rotate(0deg); }
-      33% { transform: translateY(-15px) rotate(1deg); }
-      66% { transform: translateY(5px) rotate(-1deg); }
-      100% { transform: translateY(-10px) rotate(0.5deg); }
-    }
-    
-    @keyframes previewGlow {
-      0% { box-shadow: 0 10px 30px rgba(124, 58, 237, 0.1); }
-      100% { box-shadow: 0 20px 50px rgba(124, 58, 237, 0.3); }
     }
     
     .preview-container:hover {
-      animation: previewHover 0.6s ease-out;
-      transform: scale(1.02);
       border-color: var(--primary);
-    }
-    
-    @keyframes previewHover {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1.02); }
+      box-shadow: var(--shadow-lg);
     }
     
     .landing-preview {
-      padding: 50px 40px;
+      padding: 40px;
       background: linear-gradient(135deg, #ede9fe, #ffffff);
-      min-height: 400px;
+      min-height: 350px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      animation: previewFadeIn 1s ease-out;
-    }
-    
-    @keyframes previewFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
     
     .landing-preview h2 {
-      font-size: 36px;
-      margin-bottom: 20px;
+      font-size: 32px;
+      margin-bottom: 15px;
       color: #1f2937;
-      font-weight: 800;
-      animation: previewTitleGlow 3s ease-in-out infinite alternate, textFloat 4s ease-in-out infinite;
+      font-weight: 700;
     }
     
-    @keyframes previewTitleGlow {
-      0% { text-shadow: 0 0 10px rgba(124, 58, 237, 0.3); }
-      100% { text-shadow: 0 0 25px rgba(124, 58, 237, 0.6); }
-    }
-    
-    @keyframes textFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    .landing-preview p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #4b5563;
+      line-height: 1.7;
     }
     
     .cta-button {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: white;
-      padding: 18px 36px;
-      border-radius: 12px;
+      padding: 16px 32px;
+      border-radius: 8px;
       text-decoration: none;
-      font-weight: 800;
-      font-size: 20px;
+      font-weight: 700;
+      font-size: 18px;
       transition: var(--transition);
-      box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
-      animation: ctaPulse 2.5s ease-in-out infinite, ctaFloat 6s ease-in-out infinite;
-    }
-    
-    @keyframes ctaPulse {
-      0%, 100% { 
-        transform: scale(1); 
-        box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4); 
-      }
-      50% { 
-        transform: scale(1.08); 
-        box-shadow: 0 12px 35px rgba(124, 58, 237, 0.7); 
-      }
-    }
-    
-    @keyframes ctaFloat {
-      0%, 100% { transform: translateY(0) scale(1); }
-      33% { transform: translateY(-8px) scale(1.05); }
-      66% { transform: translateY(4px) scale(1.02); }
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
     }
     
     .cta-button:hover {
       background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-      transform: translateY(-8px) scale(1.1);
-      box-shadow: 0 15px 45px rgba(124, 58, 237, 0.8);
-      animation: ctaHover 0.6s ease-out;
-    }
-    
-    @keyframes ctaHover {
-      0% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-12px) scale(1.15); }
-      100% { transform: translateY(-8px) scale(1.1); }
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
     }
     
     /* Analytics */
     .analytics-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-      margin-top: 25px;
+      gap: 20px;
+      margin-top: 20px;
     }
     
     .metric-card {
       background: linear-gradient(135deg, white, #f8fafc);
-      border-radius: 15px;
-      padding: 25px;
+      border-radius: 12px;
+      padding: 20px;
       text-align: center;
       box-shadow: var(--shadow);
-      border: 2px solid var(--border);
+      border: 1px solid var(--border);
       transition: var(--transition);
-      animation: metricPop 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
-      animation-delay: calc(var(--metric-index) * 0.1s);
     }
-    
-    @keyframes metricPop {
-      0% { 
-        opacity: 0; 
-        transform: scale(0.7) rotateY(90deg); 
-      }
-      100% { 
-        opacity: 1; 
-        transform: scale(1) rotateY(0); 
-      }
-    }
-    
-    .metric-card:nth-child(1) { --metric-index: 1; }
-    .metric-card:nth-child(2) { --metric-index: 2; }
-    .metric-card:nth-child(3) { --metric-index: 3; }
     
     .metric-card:hover {
-      transform: translateY(-10px) scale(1.1);
-      box-shadow: var(--shadow-lg), 0 15px 35px rgba(124, 58, 237, 0.2);
-      animation: metricHover 0.6s ease-out;
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
     }
     
-    @keyframes metricHover {
-      0% { transform: translateY(0) scale(1); }
-      50% { transform: translate
+    .metric-value {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 10px 0;
+    }
+    
+    .metric-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    
+    /* Tabs */
+    .tabs {
+      display: flex;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 20px;
+    }
+    
+    .tab {
+      padding: 15px 25px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: var(--transition);
+      font-weight: 600;
+      position: relative;
+    }
+    
+    .tab:hover {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+    
+    .tab.active {
+      border-bottom-color: var(--primary);
+      color: var(--primary);
+      font-weight: 700;
+      background: var(--primary-light);
+    }
+    
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, #1f2937, #374151);
+      color: white;
+      padding: 60px 0 30px;
+      margin-top: 80px;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-section h3 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: white;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-section h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--primary);
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: #d1d5db;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .footer-links a:hover {
+      color: white;
+      padding-right: 5px;
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #9ca3af;
+      font-size: 14px;
+    }
+    
+    /* Progress Bar Animation */
+    .progress-bar {
+      width: 100%;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+      width: 0%;
+      animation: progressFill 2s ease-out forwards;
+    }
+    
+    @keyframes progressFill {
+      to { width: 100%; }
+    }
+    
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .hero-title {
+        font-size: 42px;
+      }
+      
+      .main-grid {
+        grid-template-columns: 1fr 350px;
+      }
+    }
+    
+    @media (max-width: 992px) {
+      .hero-title {
+        font-size: 36px;
+      }
+      
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .analytics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .features-section {
+        padding: 60px 0;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hero-header {
+        padding: 60px 0;
+      }
+      
+      .hero-title {
+        font-size: 32px;
+      }
+      
+      .hero-subtitle {
+        font-size: 18px;
+      }
+      
+      .hero-stats {
+        gap: 30px;
+      }
+      
+      .stat-value {
+        font-size: 28px;
+      }
+      
+      .section-title {
+        font-size: 28px;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn-group {
+        flex-direction: column;
+      }
+      
+      .tabs {
+        flex-direction: column;
+      }
+      
+      .tab {
+        border-bottom: none;
+        border-right: 3px solid transparent;
+      }
+      
+      .tab.active {
+        border-right-color: var(--primary);
+        border-bottom: none;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .hero-title {
+        font-size: 28px;
+      }
+      
+      .hero-logo {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .hero-logo i {
+        font-size: 36px;
+      }
+      
+      .stat-value {
+        font-size: 24px;
+      }
+      
+      .analytics-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .landing-preview {
+        padding: 20px;
+      }
+      
+      .landing-preview h2 {
+        font-size: 24px;
+      }
+      
+      .container {
+        padding: 0 16px;
+      }
+    }
+    
+    /* Loading Animation */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(124, 58, 237, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--primary);
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Confetti Animation */
+    .confetti {
+      position: fixed;
+      width: 15px;
+      height: 15px;
+      background-color: var(--primary);
+      top: 0;
+      opacity: 0;
+      z-index: 9999;
+      pointer-events: none;
+    }
+    
+    @keyframes confettiRain {
+      0% {
+        opacity: 1;
+        transform: translateY(-100px) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(1000px) rotate(720deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Header -->
+  <div class="hero-header">
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-logo">
+          <i class="fas fa-seedling"></i>
+        </div>
+        <h1 class="hero-title">جنين — للإعلانات الذكية</h1>
+        <p class="hero-subtitle">
+          أداة متكاملة تعمل بالذكاء الاصطناعي لتوليد محتوى تسويقي فعال في دقائق معدودة. 
+          صمم صفحات هبوط احترافية، أنشئ إعلانات مذهلة، وارفع معدلات التحويل بسهولة.
+        </p>
+        
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-value">+15,000</span>
+            <span class="stat-label">صفحة هبوط مولدَة</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">+87%</span>
+            <span class="stat-label">معدل تحويل متوسط</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">5 دقائق</span>
+            <span class="stat-label">متوسط وقت التصميم</span>
+          </div>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="progress-bar" style="max-width: 400px; margin: 40px auto;">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <h2 class="section-title">مميزات جنين</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-robot"></i>
+          </div>
+          <h3 class="feature-title">ذكاء اصطناعي متقدم</h3>
+          <p>استخدم أحدث تقنيات الذكاء الاصطناعي لتوليد محتوى تسويقي مخصص ومؤثر</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-bullseye"></i>
+          </div>
+          <h3 class="feature-title">استهداف دقيق</h3>
+          <p>توجيه الإعلانات لشخصيات العملاء المختلفة لزيادة فعالية الحملات</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3 class="feature-title">تحليلات ذكية</h3>
+          <p>مراقبة أداء الحملات واتخاذ قرارات مدعومة بالبيانات</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+      <div class="main-grid">
+        <!-- Left Column: Inputs and Controls -->
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <h2><i class="fas fa-edit"></i> إدخال بيانات المنتج</h2>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="productName"><i class="fas fa-box"></i> اسم المنتج أو الخدمة</label>
+                <div class="input-with-icon">
+                  <input type="text" id="productName" placeholder="أدخل اسم منتجك أو خدمتك" value="متجر هدايا إلكترونية مخصصة">
+                  <span class="input-icon"><i class="fas fa-tag"></i></span>
+                </div>
+                <div class="form-hint">
+                  <i class="fas fa-lightbulb"></i> اختر اسمًا جذابًا وسهل التذكر
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="productDesc"><i class="fas fa-align-left"></i> وصف المنتج</label>
+                <textarea id="productDesc" placeholder="صف منتجك بإيجاز مع التركيز على الفائدة الأساسية">هدايا مخصصة عالية الجودة مع تغليف فاخر، جاهزة للتوصيل خلال 48 ساعة. اختر من بين مئات التصاميم أو صمم هديتك بنفسك.</textarea>
+                <div class="form-hint">
+                  <i class="fas fa-lightbulb"></i> ركز على فائدة واحدة رئيسية تجعل منتجك فريداً
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="productUrl"><i class="fas fa-link"></i> رابط المنتج (اختياري)</label>
+                <div class="input-with-icon">
+                  <input type="url" id="productUrl" placeholder="https://example.com">
+                  <span class="input-icon"><i class="fas fa-globe"></i></span>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="personaSelect"><i class="fas fa-user-tie"></i> الشخصية التسويقية المستهدفة</label>
+                <select id="personaSelect">
+                  <option value="budget"><i class="fas fa-money-bill-wave"></i> المشتري الاقتصادي - يهتم بالسعر والقيمة</option>
+                  <option value="social"><i class="fas fa-share-alt"></i> المشتري الاجتماعي - يهتم بالمشاركة والتجربة</option>
+                  <option value="analytical"><i class="fas fa-chart-line"></i> المشتري التحليلي - يهتم بالأدلة والضمانات</option>
+                  <option value="impulsive"><i class="fas fa-bolt"></i> المشتري الاندفاعي - يهتم بالعروض المحدودة</option>
+                </select>
+              </div>
+              
+              <div class="btn-group">
+                <button id="genAdBtn" class="btn btn-primary">
+                  <i class="fas fa-bullhorn"></i> توليد الإعلان
+                </button>
+                <button id="previewBtn" class="btn btn-secondary">
+                  <i class="fas fa-eye"></i> معاينة الصفحة
+                </button>
+                <button id="genReportBtn" class="btn btn-success">
+                  <i class="fas fa-file-alt"></i> إنشاء تقرير
+                </button>
+                <button id="exportBtn" class="btn" style="background: var(--info); color: white;">
+                  <i class="fas fa-download"></i> تصدير
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="tabs">
+              <div class="tab active" data-tab="ad-result">
+                <i class="fas fa-ad"></i> الإعلان المولد
+              </div>
+              <div class="tab" data-tab="analytics">
+                <i class="fas fa-chart-bar"></i> التحليلات
+              </div>
+              <div class="tab" data-tab="prompts">
+                <i class="fas fa-code"></i> النماذج المستخدمة
+              </div>
+            </div>
+            
+            <div class="tab-content active" id="ad-result">
+              <div class="result-box" id="adResult" aria-live="polite">
+                <div class="result-title"><i class="fas fa-ad"></i> سيظهر الإعلان المولد هنا</div>
+                اضغط على زر "توليد الإعلان" لإنشاء محتوى إعلاني مخصص لمنتجك.
+              </div>
+            </div>
+            
+            <div class="tab-content" id="analytics">
+              <div class="analytics-grid" id="analyticsContainer">
+                <!-- سيتم تعبئتها بالبيانات -->
+              </div>
+              <div class="result-box" id="analyticsDetails">
+                <!-- سيتم تعبئتها بالتفاصيل -->
+              </div>
+            </div>
+            
+            <div class="tab-content" id="prompts">
+              <div class="result-box">
+                <div class="result-title"><i class="fas fa-code"></i> النماذج المستخدمة لتوليد المحتوى</div>
+                <strong>نموذج الإعلان:</strong> 
+                دور: خبير تسويق إلكتروني. اكتب نص إعلان عربي (40-60 كلمة) يبرز فائدة المنتج الأساسية، ويتناسب مع الشخصية المستهدفة، ويحتوي على دعوة واضحة للعمل (CTA).
+                
+                <strong>نموذج صفحة الهبوط:</strong>
+                دور: مصمم تجربة مستخدم. أنشئ محتوى صفحة هبوط تجذب الزوار، تبرز ميزة المنتج الرئيسية، وتشجع على التحويل من خلال تصميم جذاب ورسالة واضحة.
+                
+                <strong>نموذج التحليلات:</strong>
+                دور: محلل بيانات. قم بتحليل أداء الحملة التسويقية وقدم توصيات مبنية على البيانات لتحسين التحويلات.
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Column: Preview -->
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <h3><i class="fas fa-desktop"></i> معاينة صفحة الهبوط</h3>
+              <span style="font-size: 14px; color: var(--text-muted)">عرض حي</span>
+            </div>
+            <div class="preview-container">
+              <div id="landingPreview" class="landing-preview">
+                <h2>عنوان صفحة الهبوط</h2>
+                <p>وصف مختصر وجذاب للمنتج يوضح قيمته للزائر.</p>
+                <a href="#" class="cta-button">ابدأ الآن <i class="fas fa-arrow-left"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">
+              <h3><i class="fas fa-info-circle"></i> معلومات المشروع</h3>
+            </div>
+            <div class="card-body">
+              <p>جنين هو نموذج أولي (MVP) متكامل لتوليد صفحات الهبوط والمحتوى التسويقي باستخدام الذكاء الاصطناعي.</p>
+              
+              <div style="margin-top: 20px; padding: 16px; background: linear-gradient(135deg, #f5f3ff, #ede9fe); border-radius: 10px; border-right: 4px solid var(--primary);">
+                <strong><i class="fas fa-exclamation-circle"></i> ملاحظة هامة للتقرير:</strong>
+                <p style="margin-top: 10px; font-size: 14px; color: var(--text);">
+                  يرجى الإفصاح في تقريرك أن المحتوى تم توليده آلياً باستخدام الذكاء الاصطناعي وتمت مراجعته بواسطتك. هذه الأداة توفر وقتك ولكن تحتاج لمراجعة بشرية.
+                </p>
+              </div>
+              
+              <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <span class="tag" style="background: var(--primary-light); color: var(--primary); padding: 6px 12px; border-radius: 20px; font-size: 13px;">
+                  <i class="fas fa-robot"></i> الذكاء الاصطناعي
+                </span>
+                <span class="tag" style="background: #d1fae5; color: #059669; padding: 6px 12px; border-radius: 20px; font-size: 13px;">
+                  <i class="fas fa-chart-line"></i> تحليلات
+                </span>
+                <span class="tag" style="background: #fef3c7; color: #d97706; padding: 6px 12px; border-radius: 20px; font-size: 13px;">
+                  <i class="fas fa-bullhorn"></i> تسويق
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>عن جنين</h3>
+          <p>منصة متكاملة لتوليد صفحات الهبوط والمحتوى التسويقي باستخدام الذكاء الاصطناعي، مصممة لمساعدة الشركات الناشئة والمسوقين على تحقيق نتائج أفضل.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>روابط سريعة</h3>
+          <ul class="footer-links">
+            <li><a href="#"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+            <li><a href="#"><i class="fas fa-chevron-left"></i> المميزات</a></li>
+            <li><a href="#"><i class="fas fa-chevron-left"></i> الأسعار</a></li>
+            <li><a href="#"><i class="fas fa-chevron-left"></i> المدونة</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>اتصل بنا</h3>
+          <ul class="footer-links">
+            <li><a href="#"><i class="fas fa-envelope"></i> info@janeen.com</a></li>
+            <li><a href="#"><i class="fas fa-phone"></i> +966 123 456 789</a></li>
+            <li><a href="#"><i class="fas fa-map-marker-alt"></i> الرياض، المملكة العربية السعودية</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>جنين - أداة تعليمية لتوليد المحتوى التسويقي | مشروع مقرر الذكاء الاصطناعي © 2024</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // إنشاء جسيمات متحركة
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const size = Math.random() * 10 + 5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.right = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.background = `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.1})`;
+        particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // تأثير الكونفيتي
+    function createConfetti() {
+      const colors = ['#7c3aed', '#10b981', '#f59e0b', '#ef4444', '#06b6d4'];
+      const confettiCount = 50;
+      
+      for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        
+        confetti.style.width = `${Math.random() * 10 + 5}px`;
+        confetti.style.height = `${Math.random() * 10 + 5}px`;
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        confetti.style.left = `${Math.random() * 100}%`;
+        
+        document.body.appendChild(confetti);
+        
+        confetti.style.animation = `confettiRain ${Math.random() * 3 + 2}s linear forwards`;
+        confetti.style.animationDelay = `${Math.random() * 0.5}s`;
+        
+        setTimeout(() => {
+          confetti.remove();
+        }, 3000);
+      }
+    }
+    
+    // تعريف جميع الدوال الرئيسية
+    function generateAd() {
+      const name = document.getElementById('productName').value.trim() || 'منتجك';
+      const desc = document.getElementById('productDesc').value.trim() || '';
+      const persona = document.getElementById('personaSelect').value;
+      
+      // تعريف الشخصيات
+      const personaDescriptors = {
+        'budget': {
+          name: 'المشتري الاقتصادي',
+          desc: 'يهتم بالسعر والقيمة ويبحث عن العروض والتوفير',
+          icon: 'fa-money-bill-wave'
+        },
+        'social': {
+          name: 'المشتري الاجتماعي',
+          desc: 'يهتم بالمشاركة والتقييمات والتجربة البصرية',
+          icon: 'fa-share-alt'
+        },
+        'analytical': {
+          name: 'المشتري التحليلي', 
+          desc: 'يهتم بالأرقام والنتائج ويفضل الأدلة والضمانات',
+          icon: 'fa-chart-line'
+        },
+        'impulsive': {
+          name: 'المشتري الاندفاعي',
+          desc: 'يتأثر بالعروض المحدودة والندرة والحماس',
+          icon: 'fa-bolt'
+        }
+      };
+      
+      const personaInfo = personaDescriptors[persona];
+      
+      // إظهار تأثير تحميل
+      const adResult = document.getElementById('adResult');
+      adResult.innerHTML = `
+        <div class="result-title"><i class="fas fa-spinner loading"></i> جاري توليد الإعلان...</div>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+      `;
+      
+      // توليد محتوى إعلاني مخصص حسب الشخصية بعد تأخير قصير
+      setTimeout(() => {
+        let adContent = generateAdContent(name, desc, persona);
+        
+        // عرض النتيجة مع تأثيرات
+        adResult.innerHTML = `
+          <div class="result-title"><i class="fas ${personaInfo.icon}"></i> إعلان مخصص لـ${personaInfo.name}</div>
+          <div style="margin: 15px 0; padding: 15px; background: white; border-radius: 8px; border-right: 4px solid var(--primary);">
+            <strong style="color: var(--primary); display: block; margin-bottom: 8px;">العنوان:</strong> 
+            <span style="font-size: 18px; font-weight: 600;">${adContent.headline}</span>
+          </div>
+          
+          <div style="margin: 15px 0; padding: 15px; background: white; border-radius: 8px; border-right: 4px solid var(--secondary);">
+            <strong style="color: var(--secondary); display: block; margin-bottom: 8px;">النص الإعلاني:</strong> 
+            <span style="font-size: 16px; line-height: 1.7;">${adContent.body}</span>
+          </div>
+          
+          <div style="margin: 15px 0; padding: 15px; background: white; border-radius: 8px; border-right: 4px solid var(--success);">
+            <strong style="color: var(--success); display: block; margin-bottom: 8px;">دعوة العمل (CTA):</strong> 
+            <span style="font-size: 18px; font-weight: 600;">${adContent.cta}</span>
+          </div>
+          
+          <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #f5f3ff, #ede9fe); border-radius: 10px; border-right: 4px solid var(--warning);">
+            <div class="result-title"><i class="fas fa-lightbulb"></i> نصائح وتحليلات</div>
+            <p style="margin: 10px 0;">${adContent.tip}</p>
+            <p style="margin: 10px 0; font-size: 14px; color: var(--text-muted);">
+              <i class="fas fa-chart-pie"></i> <strong>تحليل الأداء:</strong> هذا الإعلان مصمم لتحقيق معدل تحويل يصل إلى ${adContent.conversionRate}% عند استهداف ${personaInfo.name}.
+            </p>
+          </div>
+        `;
+        
+        // تحديث المعاينة
+        updatePreview();
+        
+        // إضافة تأثير الكونفيتي للاحتفال
+        createConfetti();
+        
+        // عرض رسالة نجاح
+        showNotification('تم توليد الإعلان بنجاح! تم تخصيص المحتوى لـ' + personaInfo.name, 'success');
+        
+        // تحديث التحليلات
+        updateAnalytics();
+      }, 1500);
+    }
+    
+    function generateAdContent(name, desc, persona) {
+      const templates = {
+        budget: {
+          headline: `${name} - وفر حتى 40% على هدايا فاخرة`,
+          body: `لا تفوت فرصة الحصول على ${desc} بأسعار تنافسية. نقدم لك أفضل قيمة مقابل المال مع خصومات حصرية وعروض محدودة. جودة عالية بأسعار معقولة تناسب ميزانيتك.`,
+          cta: 'اطلب الآن ووفر مع خصم إضافي 10% على أول طلب',
+          tip: 'ركز على التوفير والقيمة في الإعلان للمستخدمين المهتمين بالميزانية. استخدم أرقام الخصومات والعروض الخاصة.',
+          conversionRate: '15-20'
+        },
+        social: {
+          headline: `${name} - شارك فرحتك مع أحبائك`,
+          body: `اجعل مناسباتك مميزة مع ${desc}. تصاميم فريدة وجذابة تلفت الأنظار. شارك تجربتك مع أصدقائك واحصل على هدايا إضافية عند المشاركة. انضم إلى آلاف العملاء السعداء.`,
+          cta: 'اختر هديتك المفضلة وشاركها على وسائل التواصل',
+          tip: 'استخدم لغة اجتماعية وحث المستخدم على المشاركة والعرض البصري. أضف عناصر مشاركة اجتماعية.',
+          conversionRate: '18-22'
+        },
+        analytical: {
+          headline: `${name} - حل موثوق بهدايا عالية الجودة`,
+          body: `إحصائياتنا تظهر أن 95% من العملاء يعودون للطلب مرة أخرى. ${desc} مع ضمان الجودة الكامل واسترجاع خلال 14 يوم. شاهد تقييمات العملاء الحقيقية واتخذ قرارك بثقة.`,
+          cta: 'اطلب الآن مع ضمان استرجاع 14 يوم',
+          tip: 'قدم أرقام وإحصائيات وضمانات لطمأنة المستخدم التحليلي. استخدم بيانات واقعية ومؤكدة.',
+          conversionRate: '12-15'
+        },
+        impulsive: {
+          headline: `${name} - عرض محدود! هدايا سريعة التوصيل`,
+          body: `لا تفوت هذه الفرصة! ${desc} متاحة الآن بخصم 30% للطلبات في الـ24 ساعة القادمة فقط. كميات محدودة، اسرع قبل نفاد المخزون. جودة فاخرة وتوصيل سريع خلال 48 ساعة.`,
+          cta: 'اطلب الآن قبل انتهاء العرض',
+          tip: 'استخدم عنصر الندرة والإلحاح لتحفيز المستخدم الاندفاعي. ضع عدادات تنازلية وعروض محدودة الوقت.',
+          conversionRate: '25-30'
+        }
+      };
+      
+      return templates[persona] || templates.budget;
+    }
+    
+    function updatePreview() {
+      const name = document.getElementById('productName').value.trim() || 'منتجك';
+      const desc = document.getElementById('productDesc').value.trim() || '';
+      const url = document.getElementById('productUrl').value.trim() || '#';
+      const persona = document.getElementById('personaSelect').value;
+      
+      const adContent = generateAdContent(name, desc, persona);
+      
+      const preview = document.getElementById('landingPreview');
+      preview.innerHTML = `
+        <h2>${adContent.headline}</h2>
+        <p>${desc}</p>
+        <a href="${url}" class="cta-button">${adContent.cta} <i class="fas fa-arrow-left"></i></a>
+        <div style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+          <div style="display: flex; align-items: center; gap: 8px; color: var(--success);">
+            <i class="fas fa-check-circle"></i>
+            <span>ضمان 14 يوم</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; color: var(--primary);">
+            <i class="fas fa-shipping-fast"></i>
+            <span>توصيل سريع</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; color: var(--warning);">
+            <i class="fas fa-headset"></i>
+            <span>دعم 24/7</span>
+          </div>
+        </div>
+      `;
+      
+      showNotification('تم تحديث معاينة الصفحة بنجاح!', 'success');
+    }
+    
+    function generateReport() {
+      const name = document.getElementById('productName').value.trim() || 'منتجك';
+      const desc = document.getElementById('productDesc').value.trim() || '';
+      const persona = document.getElementById('personaSelect').value;
+      
+      const personaDescriptors = {
+        'budget': { name: 'المشتري الاقتصادي', desc: 'يهتم بالسعر والقيمة ويبحث عن العروض والتوفير' },
+        'social': { name: 'المشتري الاجتماعي', desc: 'يهتم بالمشاركة والتقييمات والتجربة البصرية' },
+        'analytical': { name: 'المشتري التحليلي', desc: 'يهتم بالأرقام والنتائج ويفضل الأدلة والضمانات' },
+        'impulsive': { name: 'المشتري الاندفاعي', desc: 'يتأثر بالعروض المحدودة والندرة والحماس' }
+      };
+      
+      const personaInfo = personaDescriptors[persona];
+      const adResultEl = document.getElementById('adResult');
+      
+      const adContent = adResultEl.textContent.includes('العنوان:') 
+        ? adResultEl.textContent 
+        : 'لم يتم توليد إعلان بعد. يرجى الضغط على زر "توليد الإعلان" أولاً.';
+      
+      const report = `
+===========================================
+تقرير جنين - ${new Date().toLocaleDateString('ar-EG')}
+===========================================
+
+المنتج: ${name}
+الوصف: ${desc}
+الشخصية المستهدفة: ${personaInfo.name} - ${personaInfo.desc}
+
+===========================================
+الإعلان المولد:
+===========================================
+${adContent}
+
+===========================================
+التحليلات:
+===========================================
+${generateAnalyticsText()}
+
+===========================================
+ملاحظات:
+===========================================
+- تم توليد هذا المحتوى باستخدام أداة جنين الذكية
+- يوصى بمراجعة المحتوى وتعديله ليناسب علامتك التجارية
+- الإفصاح: المحتوى تم توليده آلياً باستخدام الذكاء الاصطناعي وتمت مراجعته بشرياً
+- تاريخ التوليد: ${new Date().toLocaleString('ar-EG')}
+      `;
+      
+      // عرض تأثير التحميل قبل النسخ
+      const originalBtnText = document.getElementById('genReportBtn').innerHTML;
+      document.getElementById('genReportBtn').innerHTML = '<i class="fas fa-spinner loading"></i> جاري الإنشاء...';
+      
+      setTimeout(() => {
+        // نسخ إلى الحافظة
+        copyToClipboard(report);
+        
+        // إرجاع النص الأصلي للزر
+        document.getElementById('genReportBtn').innerHTML = originalBtnText;
+        
+        // إضافة تأثير الكونفيتي
+        createConfetti();
+        
+        showNotification('تم نسخ التقرير الكامل إلى الحافظة!', 'success');
+        
+        // عرض تحميل ملف
+        downloadReport(report, name);
+      }, 1000);
+    }
+    
+    function downloadReport(content, productName) {
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `تقرير_جنين_${productName.replace(/\s+/g, '_')}_${Date.now()}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+    
+    function generateAnalyticsText() {
+      const analyticsData = [
+        { source: 'إنستغرام', visits: 542, conversions: 24, cost: 120 },
+        { source: 'فيسبوك', visits: 387, conversions: 19, cost: 95 },
+        { source: 'جوجل', visits: 295, conversions: 12, cost: 85 },
+        { source: 'تويتر', visits: 168, conversions: 8, cost: 45 }
+      ];
+      
+      const totalVisits = analyticsData.reduce((sum, item) => sum + item.visits, 0);
+      const totalConversions = analyticsData.reduce((sum, item) => sum + item.conversions, 0);
+      const totalCost = analyticsData.reduce((sum, item) => sum + item.cost, 0);
+      const conversionRate = ((totalConversions / totalVisits) * 100).toFixed(2);
+      const costPerConversion = (totalCost / totalConversions).toFixed(2);
+      
+      let text = `إجمالي الزيارات: ${totalVisits}\nإجمالي التحويلات: ${totalConversions}\nمعدل التحويل: ${conversionRate}%\nالتكلفة الإجمالية: $${totalCost}\nمتوسط تكلفة التحويل: $${costPerConversion}\n\nتفصيل المصادر:\n`;
+      
+      analyticsData.forEach(item => {
+        const rate = ((item.conversions / item.visits) * 100).toFixed(2);
+        const costPer = (item.cost / item.conversions).toFixed(2);
+        text += `- ${item.source}: ${item.visits} زيارة, ${item.conversions} تحويل (${rate}%), التكلفة: $${item.cost}\n`;
+      });
+      
+      return text;
+    }
+    
+    function updateAnalytics() {
+      const persona = document.getElementById('personaSelect').value;
+      const personaMultipliers = {
+        'budget': { visits: 1.1, conversions: 1.15, cost: 0.9 },
+        'social': { visits: 1.3, conversions: 1.25, cost: 1.1 },
+        'analytical': { visits: 0.9, conversions: 0.85, cost: 1.2 },
+        'impulsive': { visits: 1.5, conversions: 1.4, cost: 1.0 }
+      };
+      
+      const multiplier = personaMultipliers[persona] || personaMultipliers.budget;
+      
+      const baseData = [
+        { source: 'إنستغرام', visits: 542, conversions: 24, color: '#E1306C' },
+        { source: 'فيسبوك', visits: 387, conversions: 19, color: '#1877F2' },
+        { source: 'جوجل', visits: 295, conversions: 12, color: '#0F9D58' },
+        { source: 'تويتر', visits: 168, conversions: 8, color: '#1DA1F2' }
+      ];
+      
+      const analyticsData = baseData.map(item => ({
+        ...item,
+        visits: Math.round(item.visits * multiplier.visits),
+        conversions: Math.round(item.conversions * multiplier.conversions)
+      }));
+      
+      const totalVisits = analyticsData.reduce((sum, item) => sum + item.visits, 0);
+      const totalConversions = analyticsData.reduce((sum, item) => sum + item.conversions, 0);
+      const conversionRate = ((totalConversions / totalVisits) * 100).toFixed(2);
+      
+      // إنشاء بطاقات المقاييس
+      document.getElementById('analyticsContainer').innerHTML = `
+        <div class="metric-card">
+          <div class="metric-value">${totalVisits.toLocaleString()}</div>
+          <div class="metric-label">إجمالي الزيارات</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">${totalConversions.toLocaleString()}</div>
+          <div class="metric-label">إجمالي التحويلات</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">${conversionRate}%</div>
+          <div class="metric-label">معدل التحويل</div>
+        </div>
+      `;
+      
+      // إنشاء تفاصيل التحليلات
+      let details = 'أداء الحملة حسب المصدر:\n\n';
+      analyticsData.forEach(item => {
+        const rate = ((item.conversions / item.visits) * 100).toFixed(2);
+        details += `• ${item.source}: ${item.visits.toLocaleString()} زيارة، ${item.conversions} تحويل (معدل ${rate}%)\n`;
+      });
+      
+      details += `\nملاحظة: هذه بيانات محاكاة لأغراض العرض التوضيحي وتتغير بناءً على الشخصية المستهدفة.`;
+      document.getElementById('analyticsDetails').textContent = details;
+    }
+    
+    function initAnalytics() {
+      updateAnalytics();
+    }
+    
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        console.log('تم نسخ التقرير إلى الحافظة');
+      }).catch(err => {
+        console.error('فشل في النسخ إلى الحافظة: ', err);
+        // طريقة بديلة للهواتف القديمة
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      });
+    }
+    
+    function showNotification(message, type = 'info') {
+      // إنشاء عنصر الإشعار
+      const notification = document.createElement('div');
+      notification.textContent = message;
+      notification.style.cssText = `
+        position: fixed;
+        top: 30px;
+        left: 20px;
+        right: 20px;
+        padding: 18px 24px;
+        background: ${type === 'success' ? 'linear-gradient(135deg, #d4edda, #c3e6cb)' : 
+                    type === 'error' ? 'linear-gradient(135deg, #f8d7da, #f5c6cb)' : 
+                    'linear-gradient(135deg, #d1ecf1, #bee5eb)'};
+        color: ${type === 'success' ? '#155724' : 
+                type === 'error' ? '#721c24' : 
+                '#0c5460'};
+        border: 2px solid ${type === 'success' ? '#c3e6cb' : 
+                          type === 'error' ? '#f5c6cb' : 
+                          '#bee5eb'};
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        z-index: 10000;
+        text-align: center;
+        font-weight: 600;
+        font-size: 16px;
+        backdrop-filter: blur(10px);
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        animation: fadeIn 0.5s ease;
+      `;
+      
+      // إضافة أيقونة حسب نوع الإشعار
+      const icon = document.createElement('i');
+      icon.className = type === 'success' ? 'fas fa-check-circle' : 
+                       type === 'error' ? 'fas fa-exclamation-circle' : 
+                       'fas fa-info-circle';
+      notification.prepend(icon);
+      
+      document.body.appendChild(notification);
+      
+      // إزالة الإشعار بعد 3 ثوان
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateY(-10px)';
+        notification.style.transition = 'all 0.5s ease';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            document.body.removeChild(notification);
+          }
+        }, 500);
+      }, 3000);
+    }
+    
+    function setupTabs() {
+      const tabs = document.querySelectorAll('.tab');
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          // إزالة النشاط من جميع الألسنة
+          tabs.forEach(t => t.classList.remove('active'));
+          // إخفاء جميع محتويات الألسنة
+          document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+          });
+          
+          // تفعيل اللسان المحدد
+          tab.classList.add('active');
+          // إظهار محتوى اللسان المحدد
+          const tabId = tab.getAttribute('data-tab');
+          const tabContent = document.getElementById(tabId);
+          tabContent.classList.add('active');
+        });
+      });
+    }
+    
+    // التهيئة عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+      // إنشاء الجسيمات المتحركة
+      createParticles();
+      
+      // إعداد event listeners
+      document.getElementById('genAdBtn').addEventListener('click', generateAd);
+      document.getElementById('previewBtn').addEventListener('click', updatePreview);
+      document.getElementById('genReportBtn').addEventListener('click', generateReport);
+      document.getElementById('exportBtn').addEventListener('click', generateReport);
+      
+      // إعداد نظام التبويب
+      setupTabs();
+      
+      // تهيئة التحليلات
+      initAnalytics();
+      
+      // تحديث المعاينة الأولية
+      updatePreview();
+      
+      console.log('تم تحميل منصة جنين بنجاح!');
+    });
+  </script>
+</body>
+</html>
